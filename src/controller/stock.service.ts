@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
-import { InsertItemDTO } from "./stockState.dto";
+import { ConsultItemDTO, InsertItemDTO, UpdateItemStateDTO } from "./stockState.dto";
+import { ResponseService } from "./response.dto";
 
 /**
    * Abstract class to create an interface for service operations
@@ -10,6 +11,16 @@ export abstract class IStockService {
   /**
    * @param item information related to product
    */
-  abstract insertItem(item: InsertItemDTO): Promise<void>;
+  abstract insertItem(item: InsertItemDTO): Promise<ResponseService>;
+
+  /**
+   * @param item serial number and state
+   */
+  abstract updateItemState(item: UpdateItemStateDTO): Promise<ResponseService>;
+
+  /**
+   * @param item serial number and state
+   */
+  abstract consultItem(item: ConsultItemDTO): Promise<ResponseService>;
 
 }

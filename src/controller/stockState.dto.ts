@@ -27,3 +27,21 @@ export class InsertItemDTO {
   @IsString()
   state!: EItemState;
 }
+
+export class UpdateItemStateDTO {
+  @IsNotEmpty()
+  @IsString()
+  serialNumber!: string;
+
+  @IsNotEmpty()
+  @IsString()
+  state!: EItemState;
+}
+
+
+export class ConsultItemDTO {
+  @IsNotEmpty()
+  @IsString()
+  serialNumber!: string;
+
+}
