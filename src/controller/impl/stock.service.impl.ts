@@ -21,7 +21,7 @@ export class StockService implements IStockService {
 
   /**
    * @param itemInfo serial number and state
-   * 
+   *
    */
   async updateItemState(itemInfo: InsertItemDTO): Promise<ResponseService> {
     const result = await this.stockUC.updateItem(itemInfo);
@@ -30,10 +30,15 @@ export class StockService implements IStockService {
 
   /**
    * @param itemInfo serial number
-   * 
+   *
    */
   async consultItem(serialNumber: ConsultItemDTO): Promise<ResponseService> {
     const result = await this.stockUC.consultItem(serialNumber);
     return new ResponseService(HttpStatus.OK, 'Item retreived', result);
+  }
+
+  async consultItemType(): Promise<any> {
+    const result = await this.stockUC.getItemType();
+    return new ResponseService(HttpStatus.OK, 'Types retreived', result);
   }
 }

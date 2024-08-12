@@ -23,4 +23,10 @@ export abstract class IStockProvider {
    * @param itemInfo serialNumber and state
    */
   abstract update(itemInfo: UpdateItemStateDTO): Promise<InsertItemDTO>;
+
+  /**
+   * Update document in mongoose collection
+   * @param itemInfo serialNumber and state
+   */
+  abstract getItemTypes(): Promise<any>;
 }

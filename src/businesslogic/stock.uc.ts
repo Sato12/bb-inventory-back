@@ -20,4 +20,9 @@ export abstract class IStockUc {
    * @param serialNumber information related to product
    */
   abstract consultItem(serialNumber: ConsultItemDTO): Promise<InsertItemDTO>;
+
+  /**
+   * Get item type
+   */
+  abstract getItemType(): Promise<any>;
 }

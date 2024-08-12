@@ -5,13 +5,19 @@ import { StockStatusModel } from '../model/stock.model';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CustomException } from 'src/controller/expectedException';
+import { InjectRepository } from '@nestjs/typeorm';
+import { ItemTypes } from '../model/itemType.entity';
+import { Repository } from 'typeorm';
 
 /**
  * Class for business logic
  */
 @Injectable()
 export class StockProvider implements IStockProvider {
-  constructor(@InjectModel(StockStatusModel.name) readonly stockModel: Model<StockStatusModel>) {}
+  constructor(
+    @InjectModel(StockStatusModel.name) readonly stockModel: Model<StockStatusModel>,
+    @InjectRepository(ItemTypes) private usersRepository: Repository<ItemTypes>,
+  ) {}
   /**
    * Inserts document in DB
    * @param item information related to product
@@ -58,6 +64,21 @@ export class StockProvider implements IStockProvider {
       return this.stockModel.findOneAndUpdate(filter, update, options);
     } catch (error) {
       throw new CustomException(HttpStatus.INTERNAL_SERVER_ERROR, 'Failed updating item on db', error);
+    }
+  }
+
+  /**
+   * Obtain item types
+   * @param itemInfo serialNumber and state
+   */
+  async getItemTypes(): Promise<any> {
+    try {
+      const result = await this.usersRepository.find();
+      console.log(result);
+
+      return result;
+    } catch (error) {
+      throw new CustomException(HttpStatus.INTERNAL_SERVER_ERROR, 'Failed retrieving product types', error);
     }
   }
 }

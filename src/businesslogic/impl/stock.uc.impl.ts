@@ -63,6 +63,15 @@ export class StockUsecase implements IStockUc {
   }
 
   /**
+   * Logic to update item in DB
+   * @param itemInfo information related to product
+   */
+  async getItemType(): Promise<any> {
+    const result = await this.externalData.getItemTypes();
+    return result;
+  }
+
+  /**
    * Evaluates the request with different conditions(as functions)
    * It is possible to make custom validations with the headers or body
    * @param eventInfo device

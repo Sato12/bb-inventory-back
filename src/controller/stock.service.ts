@@ -23,4 +23,9 @@ export abstract class IStockService {
    */
   abstract consultItem(item: ConsultItemDTO): Promise<ResponseService>;
 
+  /**
+   * Get item types
+   */
+  abstract consultItemType(): Promise<any>;
+
 }

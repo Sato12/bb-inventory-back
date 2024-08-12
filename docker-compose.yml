@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  app-service:
+    image: sato98/inventory-management-api-app-service
+    ports:
+      - 8080:8080
+    environment:
+      - MONGO=mongodb://no-sql-db:27017/StockStatus
+    depends_on:
+      - no-sql-db
+      - sql-db
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "512M"
+    networks:
+      - app-network
+
+  no-sql-db:
+    image: mongo:5
+    ports:
+      - 27017:27017
+    networks:
+      - app-network
+
+  sql-db:
+    image: mysql
+    environment:
+      - MYSQL_USER=User
+      - MYSQL_PASSWORD=12345
+      - MYSQL_ROOT_PASSWORD=password.12345
+      - MYSQL_DATABASE=dbItemTypes
+    ports:
+      - 3306:3306
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
