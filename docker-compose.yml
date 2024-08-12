@@ -7,6 +7,7 @@ services:
       - 8080:8080
     environment:
       - MONGO=mongodb://no-sql-db:27017/StockStatus
+      - ENV=value2
     depends_on:
       - no-sql-db
       - sql-db
